@@ -1,65 +1,65 @@
 import streamlit as st
 
-# Define acetaminophen dosing data
+# Define acetaminophen dosing data with weights converted to kilograms
 dosing_data = {
     "Infant's Acetaminophen (160 mg / 5 mL)": {
         "dose_form": "liquid",
         "concentration": 160 / 5,
         "age_weight_ranges": [
-            ((6, 11), (0, 3), 1.25),
-            ((12, 17), (4, 11), 2.5),
-            ((18, 23), (12, 23), 3.75)
+            ((2.7, 5), (0, 3), 1.25),
+            ((5.1, 7.7), (4, 11), 2.5),
+            ((8, 10.4), (12, 23), 3.75)
         ],
     },
     "Children's Acetaminophen (160 mg / 5 mL)": {
         "dose_form": "liquid",
         "concentration": 160 / 5,
         "age_weight_ranges": [
-            ((24, 35), (24, 35), 5),
-            ((36, 47), (4, 5), 7.5),
-            ((48, 59), (6, 8), 10),
-            ((60, 71), (9, 10), 12.5),
-            ((72, 95), (11, 11), 15),
-            ((96, float("inf")), (12, float("inf")), 20)
+            ((10.9, 15.9), (24, 35), 5),
+            ((16.4, 21.3), (4, 5), 7.5),
+            ((21.8, 26.8), (6, 8), 10),
+            ((27.3, 32.2), (9, 10), 12.5),
+            ((32.7, 43.1), (11, 11), 15),
+            ((43.2, float("inf")), (12, float("inf")), 20)
         ],
     },
     "Children's Acetaminophen Chewables (160 mg)": {
         "dose_form": "tablet",
         "concentration": 160,
         "age_weight_ranges": [
-            ((24, 35), (2, 3), 1),
-            ((36, 47), (4, 5), 1.5),
-            ((48, 59), (6, 8), 2),
-            ((60, 71), (9, 10), 2.5),
-            ((72, 95), (11, 11), 3),
-            ((96, float("inf")), (12, float("inf")), 4)
+            ((10.9, 15.9), (2, 3), 1),
+            ((16.4, 21.3), (4, 5), 1.5),
+            ((21.8, 26.8), (6, 8), 2),
+            ((27.3, 32.2), (9, 10), 2.5),
+            ((32.7, 43.1), (11, 11), 3),
+            ((43.2, float("inf")), (12, float("inf")), 4)
         ],
     },
     "Children's Acetaminophen Dissolvable Packets (160 mg)": {
         "dose_form": "packet",
         "concentration": 160,
         "age_weight_ranges": [
-            ((48, 59), (6, 8), 2),
-            ((60, 71), (9, 10), 2),
-            ((72, 95), (11, 11), 3)
+            ((21.8, 26.8), (6, 8), 2),
+            ((27.3, 32.2), (9, 10), 2),
+            ((32.7, 43.1), (11, 11), 3)
         ],
     },
     "Adult's Acetaminophen Tablets (325 mg)": {
         "dose_form": "tablet",
         "concentration": 325,
         "age_weight_ranges": [
-            ((48, 59), (6, 8), 1),
-            ((60, 71), (9, 10), 1),
-            ((72, 95), (11, 11), 1.5),
-            ((96, float("inf")), (12, float("inf")), 2)
+            ((21.8, 26.8), (6, 8), 1),
+            ((27.3, 32.2), (9, 10), 1),
+            ((32.7, 43.1), (11, 11), 1.5),
+            ((43.2, float("inf")), (12, float("inf")), 2)
         ],
     },
     "Adult's Acetaminophen Tablets (500 mg)": {
         "dose_form": "tablet",
         "concentration": 500,
         "age_weight_ranges": [
-            ((72, 95), (11, 11), 1),
-            ((96, float("inf")), (12, float("inf")), 1)
+            ((32.7, 43.1), (11, 11), 1),
+            ((43.2, float("inf")), (12, float("inf")), 1)
         ],
     },
 }
@@ -93,13 +93,7 @@ st.title("Acetaminophen Dosing Calculator")
 dosing_choice = st.selectbox("Would you like to dose by Weight or Age?", ["Weight", "Age"])
 
 if dosing_choice == "Weight":
-    unit = st.selectbox("Select units:", ["Pounds", "Kilograms"])
-    weight = st.number_input(f"Enter the patient's weight in {unit}:", min_value=0.0, step=0.1)
-
-    # Convert pounds to kilograms if needed
-    if unit == "Pounds":
-        weight = weight * 0.453592
-
+    weight = st.number_input("Enter the patient's weight in kilograms (kg):", min_value=0.0, step=0.1)
     age = None  # Not needed for weight-based dosing
 
 elif dosing_choice == "Age":
