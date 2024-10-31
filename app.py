@@ -75,8 +75,10 @@ def get_dosage(weight, age, formulation):
         min_weight, max_weight = weight_range
         min_age, max_age = age_range
 
-        # Check if within weight and age range
-        if min_weight <= weight <= max_weight or min_age <= age <= max_age:
+        # Check if within weight and age range (safeguard if weight or age is None)
+        weight_in_range = weight is not None and min_weight <= weight <= max_weight
+        age_in_range = age is not None and min_age <= age <= max_age
+        if weight_in_range or age_in_range:
             # Calculate and return dose
             dose_type = "mL" if formulation_data["dose_form"] == "liquid" else "tablets" if formulation_data["dose_form"] == "tablet" else "packets"
             return f"Dosage: {dose} {dose_type} of {formulation}"
@@ -101,7 +103,12 @@ if dosing_choice == "Weight":
     age = None  # Not needed for weight-based dosing
 
 elif dosing_choice == "Age":
-    age = st.number_input("Enter the patient's age in months:", min_value=0, step=1)
+    age_unit = st.selectbox("Enter age in:", ["Months", "Years"])
+    if age_unit == "Years":
+        age_years = st.number_input("Enter the patient's age in years:", min_value=0, step=1)
+        age = age_years * 12  # Convert years to months for consistency
+    else:
+        age = st.number_input("Enter the patient's age in months:", min_value=0, step=1)
     weight = None  # Not needed for age-based dosing
 
 # Select formulation
@@ -130,4 +137,3 @@ if st.button("Calculate Dosage"):
 # Restart option
 if st.button("Restart Calculator"):
     st.experimental_rerun()
-
