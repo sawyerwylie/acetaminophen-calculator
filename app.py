@@ -86,7 +86,7 @@ def get_dosage_by_age(age, formulation):
     return f"Warning: {formulation} is not typically used for this age. Please check your selection."
 
 # Streamlit interface
-st.title("Acetaminophen Dosing Calculator")
+st.title("Pediatric Acetaminophen Dosing Calculator")
 
 # User selects dosing by weight or age
 dosing_choice = st.selectbox("Would you like to dose by Weight or Age?", ["Weight", "Age"])
@@ -140,5 +140,6 @@ if st.button("Calculate Dosage"):
     - Give every 4 to 6 hours if needed for fever or pain.
     - **DO NOT exceed 4 doses in 24 hours.**
     - Avoid using with other medications containing acetaminophen.
+    - [Dosing information sourced from HealthyChildren.org](https://www.healthychildren.org/English/safety-prevention/at-home/medication-safety/Pages/Acetaminophen-for-Fever-and-Pain.aspx)
     """)
 
