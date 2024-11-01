@@ -1,6 +1,6 @@
 import streamlit as st
 
-# Define functions to get dosage based on weight or age
+# Define function to get dosage based on weight
 def get_dosage_by_weight(weight, formulation):
     # Define weight ranges and dosages for each formulation
     if formulation == "Infant's Acetaminophen (160 mg / 5 mL)":
@@ -73,7 +73,16 @@ choice = st.selectbox("Select Dosing by Weight or Age", ["Weight", "Age"])
 
 # Main input for dosing by weight
 if choice == "Weight":
-    weight = st.number_input("Enter the patient's weight in kg:", min_value=0.0, step=0.01)
+    # Select unit for weight entry
+    unit = st.selectbox("Select weight unit", ["kg", "lbs"])
+
+    # Input weight with integer display but allowing for decimal entry
+    weight = st.number_input(f"Enter the patient's weight in {unit}:", min_value=0, step=1)
+
+    # Convert weight to kg if entered in lbs
+    if unit == "lbs":
+        weight = weight * 0.453592  # Convert pounds to kilograms
+
     formulation = st.selectbox("Select the formulation", [
         "Infant's Acetaminophen (160 mg / 5 mL)",
         "Children's Acetaminophen (160 mg / 5 mL)",
@@ -101,8 +110,8 @@ elif choice == "Age":
     ])
 
     if st.button("Calculate Dosage"):
-        # Converting age to months and fetching dosage based on age ranges
-        dosage, dose = get_dosage_by_weight(age_months, formulation) # Implement get_dosage_by_age if needed
+        # Placeholder for potential age-based calculations
+        dosage, dose = get_dosage_by_weight(age_months, formulation)
         st.write(f"Dosage: {dosage} ({dose})")
 
 st.write("Note: Dosing information is sourced from [HealthyChildren.org](https://www.healthychildren.org/English/safety-prevention/at-home/medication-safety/Pages/Acetaminophen-for-Fever-and-Pain.aspx).")
