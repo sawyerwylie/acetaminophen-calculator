@@ -98,8 +98,16 @@ if choice == "Weight":
 
 # Main input for dosing by age
 elif choice == "Age":
-    age_years = st.number_input("Enter the patient's age in years:", min_value=0, step=1)
-    age_months = age_years * 12
+    # Select unit for age entry
+    age_unit = st.selectbox("Select age unit", ["Months", "Years"])
+
+    # Enter age
+    if age_unit == "Years":
+        age = st.number_input("Enter the patient's age in years:", min_value=0, step=1)
+        age = age * 12  # Convert years to months
+    else:
+        age = st.number_input("Enter the patient's age in months:", min_value=0, step=1)
+
     formulation = st.selectbox("Select the formulation", [
         "Infant's Acetaminophen (160 mg / 5 mL)",
         "Children's Acetaminophen (160 mg / 5 mL)",
@@ -110,8 +118,7 @@ elif choice == "Age":
     ])
 
     if st.button("Calculate Dosage"):
-        # Placeholder for potential age-based calculations
-        dosage, dose = get_dosage_by_weight(age_months, formulation)
+        dosage, dose = get_dosage_by_weight(age, formulation)
         st.write(f"Dosage: {dosage} ({dose})")
 
 st.write("Note: Dosing information is sourced from [HealthyChildren.org](https://www.healthychildren.org/English/safety-prevention/at-home/medication-safety/Pages/Acetaminophen-for-Fever-and-Pain.aspx).")
