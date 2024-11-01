@@ -93,9 +93,9 @@ dosing_choice = st.selectbox("Would you like to dose by Weight or Age?", ["Weigh
 
 # If dosing by weight
 if dosing_choice == "Weight":
-    # Get weight input in pounds or kilograms
+    # Get weight input in pounds or kilograms with a simple "0" starting value
     unit = st.selectbox("Select units:", ["Pounds", "Kilograms"])
-    weight = st.number_input("Enter the patient's weight:", min_value=0.0, step=0.1)
+    weight = st.number_input("Enter the patient's weight:", min_value=0.0, step=0.1, format="%g")
 
     # Convert pounds to kilograms if needed
     if unit == "Pounds":
