@@ -79,6 +79,79 @@ def get_dosage_by_weight(weight, formulation):
 
     return "Dose not available", "Please consult a healthcare provider.", warning
 
+# Define function to get dosage by age
+def get_dosage_by_age(age, formulation):
+    # Define age ranges and dosages for each formulation
+    warning = ""  # Initialize warning message
+
+    if formulation == "Infant's Acetaminophen (160 mg / 5 mL)":
+        if age > 23:
+            warning = "Warning: Infant's Acetaminophen is not typically used for this age. Please verify your selection."
+        if 0 <= age <= 3:
+            return "1.25 mL", "40 mg", warning
+        elif 4 <= age <= 11:
+            return "2.5 mL", "80 mg", warning
+        elif 12 <= age <= 23:
+            return "3.75 mL", "120 mg", warning
+
+    elif formulation == "Children's Acetaminophen (160 mg / 5 mL)":
+        if age < 24 or age > 143:
+            warning = "Warning: Children's Acetaminophen liquid is not typically used for this age. Please verify your selection."
+        if 24 <= age <= 35:
+            return "5 mL", "160 mg", warning
+        elif 36 <= age <= 47:
+            return "7.5 mL", "240 mg", warning
+        elif 48 <= age <= 71:
+            return "10 mL", "320 mg", warning
+        elif 72 <= age <= 95:
+            return "12.5 mL", "400 mg", warning
+        elif 96 <= age <= 143:
+            return "15 mL", "480 mg", warning
+        elif age >= 144:
+            return "20 mL", "640 mg", warning
+
+    elif formulation == "Children's Acetaminophen Chewables (160 mg)":
+        if age < 24 or age > 143:
+            warning = "Warning: Children's Acetaminophen chewables are not typically used for this age. Please verify your selection."
+        if 24 <= age <= 35:
+            return "1 tablet", "160 mg", warning
+        elif 36 <= age <= 47:
+            return "1.5 tablets", "240 mg", warning
+        elif 48 <= age <= 71:
+            return "2 tablets", "320 mg", warning
+        elif 72 <= age <= 95:
+            return "2.5 tablets", "400 mg", warning
+        elif 96 <= age <= 143:
+            return "3 tablets", "480 mg", warning
+        elif age >= 144:
+            return "4 tablets", "640 mg", warning
+
+    elif formulation == "Children's Acetaminophen Dissolvable Packets (160 mg)":
+        if age < 48 or age > 95:
+            warning = "Warning: Children's Acetaminophen dissolvable packets are not typically used for this age. Please verify your selection."
+        if 48 <= age <= 71:
+            return "2 packets", "320 mg", warning
+        elif 72 <= age <= 95:
+            return "3 packets", "480 mg", warning
+
+    elif formulation == "Adult's Acetaminophen Tablets (325 mg)":
+        if age < 72:
+            warning = "Warning: Adult Acetaminophen tablets are not typically used for this age. Please verify your selection."
+        if 72 <= age <= 95:
+            return "1.5 tablets", "487.5 mg", warning
+        elif age >= 96:
+            return "2 tablets", "650 mg", warning
+
+    elif formulation == "Adult's Acetaminophen Tablets (500 mg)":
+        if age < 72:
+            warning = "Warning: Adult Acetaminophen tablets are not typically used for this age. Please verify your selection."
+        if 72 <= age <= 95:
+            return "1 tablet", "500 mg", warning
+        elif age >= 96:
+            return "1 tablet", "500 mg", warning
+
+    return "Dose not available", "Please consult a healthcare provider.", warning
+
 # Streamlit app layout
 st.title("Pediatric Acetaminophen Dosing Calculator")
 
@@ -136,7 +209,7 @@ elif choice == "Age":
     ])
 
     if st.button("Calculate Dosage"):
-        dosage, dose, warning = get_dosage_by_weight(age, formulation)
+        dosage, dose, warning = get_dosage_by_age(age, formulation)
         if warning:
             st.warning(warning)
         st.write(f"Dosage: {dosage} ({dose})")
