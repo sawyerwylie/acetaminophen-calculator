@@ -216,4 +216,4 @@ elif choice == "Age":
         st.write("Give every 4 to 6 hours as needed for fever or pain. Do not exceed 5 doses in 24 hours.")
         st.write("Do not use with any other medicine containing acetaminophen.")
 
-st.write("Note: Dosing information is sourced from [HealthyChildren.org](https://www.healthychildren.org/English/safety-prevention/at-home/medication-safety/Pages/Acetaminophen-for-Fever-and-Pain.aspx).")
+st.write("Note: There are a variety of dosing strategies with acetaminophen, this is one example. Dosing information is sourced from [HealthyChildren.org](https://www.healthychildren.org/English/safety-prevention/at-home/medication-safety/Pages/Acetaminophen-for-Fever-and-Pain.aspx).")
