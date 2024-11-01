@@ -71,7 +71,7 @@ def get_dosage_by_weight(weight_kg, formulation):
     # If no valid dosage is found, return a warning message
     return f"Warning: {formulation} is not typically used for this weight. Please check your selection."
 
-# Function to calculate dosage based on age
+# Function to calculate dosage based on age in months
 def get_dosage_by_age(age, formulation):
     # Set dosages for Infant's Acetaminophen (160 mg / 5 mL) based on age in months
     if formulation == "Infant's Acetaminophen (160 mg / 5 mL)":
@@ -82,7 +82,64 @@ def get_dosage_by_age(age, formulation):
         elif 12 <= age <= 23:
             return "Dosage: 3.75 mL (120 mg)"
     
-    # Additional formulations can be added here with specific age ranges as needed
+    # Set dosages for Children's Acetaminophen (160 mg / 5 mL) based on age in months
+    elif formulation == "Children's Acetaminophen (160 mg / 5 mL)":
+        if 24 <= age <= 35:
+            return "Dosage: 5 mL (160 mg)"
+        elif 36 <= age <= 47:
+            return "Dosage: 7.5 mL (240 mg)"
+        elif 48 <= age <= 59:
+            return "Dosage: 10 mL (320 mg)"
+        elif 60 <= age <= 71:
+            return "Dosage: 12.5 mL (400 mg)"
+        elif 72 <= age <= 95:
+            return "Dosage: 15 mL (480 mg)"
+        elif age >= 96:
+            return "Dosage: 20 mL (640 mg)"
+
+    # Set dosages for Children's Acetaminophen Chewables (160 mg) based on age in months
+    elif formulation == "Children's Acetaminophen Chewables (160 mg)":
+        if 24 <= age <= 35:
+            return "Dosage: 1 tablet (160 mg)"
+        elif 36 <= age <= 47:
+            return "Dosage: 1.5 tablets (240 mg)"
+        elif 48 <= age <= 59:
+            return "Dosage: 2 tablets (320 mg)"
+        elif 60 <= age <= 71:
+            return "Dosage: 2.5 tablets (400 mg)"
+        elif 72 <= age <= 95:
+            return "Dosage: 3 tablets (480 mg)"
+        elif age >= 96:
+            return "Dosage: 4 tablets (640 mg)"
+
+    # Set dosages for Children's Acetaminophen Dissolvable Packets (160 mg) based on age in months
+    elif formulation == "Children's Acetaminophen Dissolvable Packets (160 mg)":
+        if 48 <= age <= 59:
+            return "Dosage: 2 packets (320 mg)"
+        elif 60 <= age <= 71:
+            return "Dosage: 2 packets (320 mg)"
+        elif 72 <= age <= 95:
+            return "Dosage: 3 packets (480 mg)"
+
+    # Set dosages for Adult's Acetaminophen Tablets (325 mg) based on age in months
+    elif formulation == "Adult's Acetaminophen Tablets (325 mg)":
+        if 48 <= age <= 59:
+            return "Dosage: 1 tablet (325 mg)"
+        elif 60 <= age <= 71:
+            return "Dosage: 1 tablet (325 mg)"
+        elif 72 <= age <= 95:
+            return "Dosage: 1.5 tablets (487.5 mg)"
+        elif age >= 96:
+            return "Dosage: 2 tablets (650 mg)"
+
+    # Set dosages for Adult's Acetaminophen Tablets (500 mg) based on age in months
+    elif formulation == "Adult's Acetaminophen Tablets (500 mg)":
+        if 72 <= age <= 95:
+            return "Dosage: 1 tablet (500 mg)"
+        elif age >= 96:
+            return "Dosage: 1 tablet (500 mg)"
+
+    # If no valid dosage is found, return a warning message
     return f"Warning: {formulation} is not typically used for this age. Please check your selection."
 
 # Streamlit interface
